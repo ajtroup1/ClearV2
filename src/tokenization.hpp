@@ -12,7 +12,10 @@ enum class TokenType {
     int_lit,
     semi,
     open_paren,
-    close_paren
+    close_paren,
+    ident,
+    let,
+    eq
 };
 
 // Actual token class to be referenced throughout the parser
@@ -54,11 +57,17 @@ public:
                     tokens.push_back({.type = TokenType::exit});
                     buf.clear();
                     continue;
-                } 
+                } else if (buf == "let") {
+                    tokens.push_back({.type = TokenType::let});
+                    buf.clear();
+                    continue;
+                }
                 
                 // buffer is an identifier
                 else {
-                    // ident
+                    tokens.push_back({.type = TokenType::ident, .value = buf});
+                    buf.clear();
+                    continue;
                 }
             } 
 
@@ -79,16 +88,24 @@ public:
             else if (peek().value() == '(') {
                 consume();
                 tokens.push_back({.type = TokenType::open_paren});
+                continue;
             }
             else if (peek().value() == ')') {
                 consume();
                 tokens.push_back({.type = TokenType::close_paren});
+                continue;
             }
             else if (peek().value() == ';') {
                 tokens.push_back({.type = TokenType::semi});
                 consume();
                 continue;
-            } else if (std::isspace(peek().value())) {
+            } 
+            else if (peek().value() == '=') {
+                tokens.push_back({.type = TokenType::eq});
+                consume();
+                continue;
+            }
+            else if (std::isspace(peek().value())) {
                 consume();
                 continue;
             } 
