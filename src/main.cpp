@@ -1,3 +1,5 @@
+// TODO: 8:21 pt.2
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -45,8 +47,9 @@ int main(int argc, char* argv[]) {
         contents = contents_stream.str();
     }
 
+    Tokenizer tokenizer(std::move(contents));
     // convert source string to tokens using the tokenize function
-    std::vector<Token> tokens = tokenize(contents);
+    std::vector<Token> tokens = tokenizer.tokenize();
 
     {
         std::fstream file("out.asm", std::ios::out);
