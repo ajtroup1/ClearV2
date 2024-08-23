@@ -38,12 +38,14 @@ public:
                     exit(EXIT_FAILURE);
                 }
 
-                if (!peek().has_value() || peek().value().type != TokenType::semi) {
+                if (peek().has_value() && peek().value().type == TokenType::semi) {
+                    consume();
+                } else {
                     std::cerr << "Missing semicolon after exit" << std::endl;
                     exit(EXIT_FAILURE);
                 }
 
-                
+
             }
         }
 
