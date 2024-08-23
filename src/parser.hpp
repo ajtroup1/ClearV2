@@ -26,8 +26,9 @@ public:
     std::optional<NodeExit> parse() {
         std::optional<NodeExit> exit_node;
         while (peek().has_value()) {
-            if (peek().value().type == TokenType::exit) {
+            if (peek().value().type == TokenType::exit && peek(1).has_value() && peek(1).value().type == TokenType::open_paren) {
                 consume(); // consume exit token
+                consume(); // consume '('
                 // 'auto' creates the node_expr in the if stmt
                 // auto implicitly types node_expr as the return type of the expression, parse_expr()
                 // since we're using std::optional, if parse_expr() returns a value (non-null), the if block is executed. If it returns null, the else block is executed.
@@ -38,10 +39,16 @@ public:
                     exit(EXIT_FAILURE);
                 }
 
+                if (peek().has_value() && peek().value().type == TokenType::close_paren) {
+                    consume();
+                } else {
+                    std::cerr << "Missing ')' after exit" << std::endl;
+                    exit(EXIT_FAILURE);
+                }
                 if (peek().has_value() && peek().value().type == TokenType::semi) {
                     consume();
                 } else {
-                    std::cerr << "Missing semicolon after exit" << std::endl;
+                    std::cerr << "Missing ';' after exit" << std::endl;
                     exit(EXIT_FAILURE);
                 }
 
@@ -62,12 +69,12 @@ public:
     }
 private:
     // peek ahead, this time with tokens, not just chars
-    [[nodiscard]] inline std::optional<Token> peek(int ahead = 1) const {
-        if (m_index + ahead > m_tokens.size()) {
+    [[nodiscard]] inline std::optional<Token> peek(int offset = 0) const {
+        if (m_index + offset >= m_tokens.size()) {
             return {};
         }
 
-        return m_tokens.at(m_index);
+        return m_tokens.at(m_index + offset);
     }
 
     // advance to next token

@@ -4,15 +4,23 @@ We are so back
 # Grammar
 - Each production has its own function that will return an optional typed for the item on the left
 
+- ** Production rules formatting available when previewing mdarkdown in VSCode
+
 ### Production rules:
 
 $$
 
 \begin{align}
 
-[\text{expr}] &\to \text{int\_lit}
+[\text{prog}] &\to [\text{stmt}]^*
 \\
-[\text{exit}] &\to exit([\text{expr}]);
+[\text{stmt}] &\to 
+\begin{cases}
+exit([\text{expr}]); \\
+let\space\text{ident} = [\text{expr}];
+\end{cases}
+\\
+[\text{expr}] &\to \text{int\_lit}
 \\
 
 

@@ -10,7 +10,9 @@
 enum class TokenType {
     exit,
     int_lit,
-    semi
+    semi,
+    open_paren,
+    close_paren
 };
 
 // Actual token class to be referenced throughout the parser
@@ -73,8 +75,15 @@ public:
                 buf.clear();
                 continue;
             } 
-            
             // misc symbols / chars checking
+            else if (peek().value() == '(') {
+                consume();
+                tokens.push_back({.type = TokenType::open_paren});
+            }
+            else if (peek().value() == ')') {
+                consume();
+                tokens.push_back({.type = TokenType::close_paren});
+            }
             else if (peek().value() == ';') {
                 tokens.push_back({.type = TokenType::semi});
                 consume();
@@ -96,12 +105,12 @@ public:
     }
 private:
     // peek looks ahead in the src code, usually to the next char, but optionally more
-    [[nodiscard]] inline std::optional<char> peek(int ahead = 1) const {
-        if (m_index + ahead > m_src.length()) {
+    [[nodiscard]] inline std::optional<char> peek(int offset = 0) const {
+        if (m_index + offset >= m_src.length()) {
             return {};
         }
 
-        return m_src.at(m_index);
+        return m_src.at(m_index + offset);
     }
 
     // actually advances to the next char in the src
