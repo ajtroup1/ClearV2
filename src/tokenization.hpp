@@ -95,7 +95,8 @@ public:
         return tokens;
     }
 private:
-    [[nodiscard]] std::optional<char> peek(int ahead = 1) const {
+    // peek looks ahead in the src code, usually to the next char, but optionally more
+    [[nodiscard]] inline std::optional<char> peek(int ahead = 1) const {
         if (m_index + ahead > m_src.length()) {
             return {};
         }
@@ -103,9 +104,12 @@ private:
         return m_src.at(m_index);
     }
 
-    char consume() {
+    // actually advances to the next char in the src
+    inline char consume() {
         return m_src.at(m_index++);
     }
-    const std::string m_src;
-    int m_index = 0;
+
+    // member vars
+    const std::string m_src; // entire src code
+    size_t m_index = 0; // position pointer
 };

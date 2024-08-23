@@ -6,7 +6,9 @@
 #include <optional>
 #include <vector>
 
+#include "parser.hpp"
 #include "tokenization.hpp"
+#include "generation.hpp"
 
 // temporary function to convert tokens to assambly
 std::string tokens_to_asm(const std::vector<Token>& tokens) {
