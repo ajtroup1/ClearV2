@@ -31,6 +31,7 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
   /usr/include/c++/11/bits/functexcept.h \
   /usr/include/c++/11/bits/functional_hash.h \
   /usr/include/c++/11/bits/hash_bytes.h \
+  /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/ios_base.h \
   /usr/include/c++/11/bits/istream.tcc \
   /usr/include/c++/11/bits/iterator_concepts.h \
@@ -45,6 +46,7 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
   /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/bits/ostream_insert.h \
+  /usr/include/c++/11/bits/parse_numbers.h \
   /usr/include/c++/11/bits/postypes.h \
   /usr/include/c++/11/bits/predefined_ops.h \
   /usr/include/c++/11/bits/ptr_traits.h \
@@ -86,6 +88,7 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
   /usr/include/c++/11/debug/assertions.h \
   /usr/include/c++/11/debug/debug.h \
   /usr/include/c++/11/exception \
+  /usr/include/c++/11/ext/aligned_buffer.h \
   /usr/include/c++/11/ext/alloc_traits.h \
   /usr/include/c++/11/ext/atomicity.h \
   /usr/include/c++/11/ext/new_allocator.h \
@@ -112,6 +115,7 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
   /usr/include/c++/11/type_traits \
   /usr/include/c++/11/typeinfo \
   /usr/include/c++/11/utility \
+  /usr/include/c++/11/variant \
   /usr/include/c++/11/vector \
   /usr/include/ctype.h \
   /usr/include/endian.h \
@@ -262,15 +266,17 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 
 /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
 /usr/include/c++/11/cerrno:
 
 /usr/include/c++/11/bits/ranges_cmp.h:
-
-/usr/include/c++/11/bits/stringfwd.h:
-
-/usr/include/asm-generic/errno.h:
-
-/usr/include/c++/11/bits/string_view.tcc:
 
 /usr/include/c++/11/bits/uniform_int_dist.h:
 
@@ -283,8 +289,6 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 /usr/include/c++/11/bits/vector.tcc:
 
 /usr/include/c++/11/bits/localefwd.h:
-
-/usr/include/c++/11/bits/streambuf_iterator.h:
 
 /usr/include/c++/11/bits/range_access.h:
 
@@ -317,6 +321,8 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 /usr/include/c++/11/bits/postypes.h:
 
 /usr/include/c++/11/cwctype:
+
+/usr/include/c++/11/bits/parse_numbers.h:
 
 /usr/include/c++/11/bits/nested_exception.h:
 
@@ -364,6 +370,16 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
+/usr/include/c++/11/bits/stl_iterator.h:
+
+/usr/include/c++/11/bits/locale_facets.h:
+
+/usr/include/stdc-predef.h:
+
+/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
 /usr/include/c++/11/bits/stl_bvector.h:
 
 /usr/include/c++/11/debug/assertions.h:
@@ -377,8 +393,6 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
 
 /usr/include/c++/11/bits/locale_classes.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
 /usr/include/c++/11/bits/basic_string.h:
 
@@ -406,8 +420,6 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 
 /usr/include/c++/11/backward/binders.h:
 
-/usr/include/c++/11/concepts:
-
 /usr/include/asm-generic/errno-base.h:
 
 /usr/include/c++/11/bits/functexcept.h:
@@ -422,23 +434,15 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 
 /usr/include/c++/11/bits/allocator.h:
 
-/usr/include/c++/11/bits/std_abs.h:
-
 /usr/include/c++/11/bits/functional_hash.h:
-
-/usr/include/c++/11/bits/stl_iterator.h:
-
-/usr/include/c++/11/bits/locale_facets.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 /usr/include/c++/11/bits/predefined_ops.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/c++/11/bits/stringfwd.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
@@ -452,15 +456,11 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 
 /usr/include/c++/11/iostream:
 
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
 /usr/include/c++/11/bits/exception_ptr.h:
 
 /usr/include/c++/11/cwchar:
 
 /usr/include/c++/11/bits/charconv.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
 /usr/include/c++/11/bits/codecvt.h:
 
@@ -478,10 +478,6 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 
 /usr/include/c++/11/bits/exception.h:
 
-/usr/include/c++/11/vector:
-
-/usr/include/c++/11/bits/concept_check.h:
-
 /usr/include/c++/11/bits/stl_algobase.h:
 
 /usr/include/endian.h:
@@ -498,9 +494,27 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 
 /usr/include/c++/11/bits/hash_bytes.h:
 
+/usr/include/c++/11/bits/string_view.tcc:
+
+/usr/include/c++/11/bits/std_abs.h:
+
+/usr/include/c++/11/bits/invoke.h:
+
 /usr/include/c++/11/bits/algorithmfwd.h:
 
+/usr/include/c++/11/concepts:
+
+/usr/include/c++/11/bits/concept_check.h:
+
+/usr/include/c++/11/vector:
+
 /usr/include/c++/11/debug/debug.h:
+
+/usr/include/c++/11/ext/aligned_buffer.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
+
+/usr/include/c++/11/ext/string_conversions.h:
 
 /usr/include/c++/11/ext/alloc_traits.h:
 
@@ -509,10 +523,6 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 /usr/include/c++/11/cstdint:
 
 /usr/include/c++/11/ext/new_allocator.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
-
-/usr/include/c++/11/ext/string_conversions.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
@@ -559,6 +569,10 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 /usr/include/c++/11/typeinfo:
 
 /usr/include/c++/11/utility:
+
+/usr/include/c++/11/bits/streambuf_iterator.h:
+
+/usr/include/c++/11/variant:
 
 /usr/include/linux/errno.h:
 
@@ -633,5 +647,3 @@ CMakeFiles/clear.dir/src/main.cpp.o: /home/adamjtroup/Monkey/ClearV2/src/main.cp
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:

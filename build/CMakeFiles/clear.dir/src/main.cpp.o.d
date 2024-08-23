@@ -168,5 +168,8 @@ CMakeFiles/clear.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/stl_bvector.h \
  /usr/include/c++/11/bits/vector.tcc \
  /home/adamjtroup/Monkey/ClearV2/src/parser.hpp \
+ /usr/include/c++/11/variant /usr/include/c++/11/bits/invoke.h \
+ /usr/include/c++/11/ext/aligned_buffer.h \
+ /usr/include/c++/11/bits/parse_numbers.h \
  /home/adamjtroup/Monkey/ClearV2/src/tokenization.hpp \
  /home/adamjtroup/Monkey/ClearV2/src/generation.hpp
