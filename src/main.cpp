@@ -9,6 +9,7 @@
 #include "parser.hpp"
 #include "tokenization.hpp"
 #include "generation.hpp"
+#include "arena.hpp"
 
 int main(int argc, char* argv[]) {
     // expects an additional command-level argument referencing path to the clear script to run

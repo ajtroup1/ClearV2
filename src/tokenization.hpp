@@ -15,7 +15,9 @@ enum class TokenType {
     close_paren,
     ident,
     let,
-    eq
+    eq,
+    plus,
+    multi
 };
 
 // Actual token class to be referenced throughout the parser
@@ -102,6 +104,16 @@ public:
             } 
             else if (peek().value() == '=') {
                 tokens.push_back({.type = TokenType::eq});
+                consume();
+                continue;
+            }
+            else if (peek().value() == '+') {
+                tokens.push_back({.type = TokenType::plus});
+                consume();
+                continue;
+            }
+            else if (peek().value() == '*') {
+                tokens.push_back({.type = TokenType::multi});
                 consume();
                 continue;
             }
