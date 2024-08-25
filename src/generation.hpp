@@ -16,8 +16,27 @@ public:
     void gen_term(const NodeTerm* term) {
         struct TermVisistor {
             Generator* gen;
-            
+            void operator()(const NodeTermIntLit* term_int_lit) const {
+                gen->m_output << "    mov rax, " << term_int_lit->int_lit.value.value() << "\n";
+                gen->push("rax");
+            }
+            void operator()(const NodeTermIdent* term_ident) const {
+                const auto& ident_value = term_ident->ident.value.value();
+                
+                if (!gen->m_vars.contains(ident_value)) {
+                    std::cerr << "Variable '" << ident_value << "' not declared" << std::endl;
+                    exit(EXIT_FAILURE);
+                }
+
+                const auto& var = gen->m_vars.at(ident_value);
+
+                std::stringstream offset;
+                offset << "QWORD [rsp + " << (gen->m_stack_size - var.stack_loc - 1) * 8 << "]";
+                gen->push(offset.str());
+            }
         };
+        TermVisistor visitor({.gen = this});
+        std::visit(visitor, term->var);
     }
 
     // **NOTE
@@ -30,25 +49,9 @@ public:
         struct ExprVisitor {
             Generator* gen;
 
-            // handle integer literal expression
-            void operator()(const NodeExprIntLit* expr_int_lit) const {
-                gen->m_output << "    mov rax, " << expr_int_lit->int_lit.value.value() << "\n";
-                gen->push("rax");
-            }
-            // handle identifier expressions
-            void operator()(const NodeExprIdent* expr_ident) const {
-                const auto& ident_value = expr_ident->ident.value.value();
-                
-                if (!gen->m_vars.contains(ident_value)) {
-                    std::cerr << "Variable '" << ident_value << "' not declared" << std::endl;
-                    exit(EXIT_FAILURE);
-                }
-
-                const auto& var = gen->m_vars.at(ident_value);
-
-                std::stringstream offset;
-                offset << "QWORD [rsp + " << (gen->m_stack_size - var.stack_loc - 1) * 8 << "]";
-                gen->push(offset.str());
+            // handle terms (int lit, ident...)
+            void operator()(const NodeTerm* term) const {
+                gen->gen_term(term);
             }
             // handles binary expressions
             void operator()(const NodeBinExpr* bin_expr) const {
