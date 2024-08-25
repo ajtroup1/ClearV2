@@ -81,43 +81,19 @@ public:
     {
     }
 
-    // std::optional<NodeBinExpr*> parse_bin_expr() {
-    //     if (auto lhs = parse_expr()) {
-    //         auto bin_expr = m_allocator.alloc<NodeBinExpr>();
-    //         if (peek().has_value() && peek().value().type == TokenType::plus) {
-    //             auto bin_expr_add = m_allocator.alloc<NodeBinExprAdd>();
-    //             bin_expr_add->lhs = lhs.value();
-    //             consume();
-    //             if (auto rhs = parse_expr()) {
-    //                 bin_expr_add->rhs = rhs.value();
-    //                 bin_expr->var = bin_expr_add;
-    //                 return bin_expr;
-    //             } else {
-    //                 std::cerr << "Unable to parse expression on right hand side" << std::endl;
-    //                 exit(EXIT_FAILURE);
-    //             }
-    //         } else {
-    //             std::cerr << "Unrecognized operator" << std::endl;
-    //             exit(EXIT_FAILURE);
-    //         }
-    //     } else {
-    //         return {};
-    //     }
-    // }
-
     std::optional<NodeTerm*> parse_term() {
         // handle integer literal
-        if (peek().has_value() && peek().value().type == TokenType::int_lit) {
+        if (auto int_lit = try_consume(TokenType::int_lit)) {
             auto term_int_lit = m_allocator.alloc<NodeTermIntLit>();
-            term_int_lit->int_lit = consume();
+            term_int_lit->int_lit = int_lit.value();
             auto term = m_allocator.alloc<NodeTerm>();
             term->var = term_int_lit;
             return term;
         }
         // handle identifier
-        else if (peek().has_value() && peek().value().type == TokenType::ident) {
+        else if (auto ident = try_consume(TokenType::ident)) {
             auto term_ident = m_allocator.alloc<NodeTermIdent>();
-            term_ident->ident = consume();
+            term_ident->ident = ident.value();
             auto term = m_allocator.alloc<NodeTerm>();
             term->var = term_ident;
             return term;
@@ -131,13 +107,12 @@ public:
     // integer literal, identifier
     std::optional<NodeExpr*> parse_expr() {
         if (auto term = parse_term()) {
-            if (peek().has_value() && peek().value().type == TokenType::plus) {
+            if (try_consume(TokenType::plus).has_value()) {
                 auto bin_expr = m_allocator.alloc<NodeBinExpr>();
                 auto bin_expr_add = m_allocator.alloc<NodeBinExprAdd>();
                 auto lhs_expr = m_allocator.alloc<NodeExpr>();
                 lhs_expr->var = term.value();
                 bin_expr_add->lhs = lhs_expr;
-                consume();
                 if (auto rhs = parse_expr()) {
                     bin_expr_add->rhs = rhs.value();
                     // bin_expr->var = bin_expr_add;
@@ -181,19 +156,8 @@ public:
                 std::cerr << "Invalid expression" << std::endl;
                 exit(EXIT_FAILURE);
             }
-
-            if (peek().has_value() && peek().value().type == TokenType::close_paren) {
-                consume();
-            } else {
-                std::cerr << "Missing ')' after exit" << std::endl;
-                exit(EXIT_FAILURE);
-            }
-            if (peek().has_value() && peek().value().type == TokenType::semi) {
-                consume();
-            } else {
-                std::cerr << "Missing ';' after exit" << std::endl;
-                exit(EXIT_FAILURE);
-            }
+            try_consume(TokenType::close_paren, "Expected `)`");
+            try_consume(TokenType::semi, "Expected `;`");
 
             auto stmt = m_allocator.alloc<NodeStmt>();
             stmt->var = stmt_exit; 
@@ -215,12 +179,8 @@ public:
                 std::cerr << "Invalid expression" << std::endl;
                 exit(EXIT_FAILURE);
             }
-            if (peek().has_value() && peek().value().type == TokenType::semi) {
-                consume(); // ';'
-            } else {
-                std::cerr << "Expected ';'" << std::endl;
-                exit(EXIT_FAILURE);
-            }
+            
+            try_consume(TokenType::semi, "Expected `;`");
 
             // return NodeStmt {.var = stmt_let};
             auto stmt = m_allocator.alloc<NodeStmt>();
@@ -259,6 +219,22 @@ private:
         }
 
         return m_tokens.at(m_index + offset);
+    }
+
+    inline Token try_consume(TokenType type, const std::string& err_msg) {
+        if (peek().has_value() && peek().value().type == type) {
+            return consume();
+        } else {
+            std::cerr << err_msg << std::endl;
+            exit(EXIT_FAILURE);
+        }
+    }
+    inline std::optional<Token> try_consume(TokenType type) {
+        if (peek().has_value() && peek().value().type == type) {
+            return consume();
+        } else {
+            return {};
+        }
     }
 
     // advance to next token
