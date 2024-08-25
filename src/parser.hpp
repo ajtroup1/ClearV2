@@ -26,10 +26,10 @@ struct NodeBinExprAdd {
     NodeExpr* rhs;
     
 };
-struct NodeBinExprMulti {
-    NodeExpr* lhs;
-    NodeExpr* rhs;
-};
+// struct NodeBinExprMulti {
+//     NodeExpr* lhs;
+//     NodeExpr* rhs;
+// };
 
 struct NodeTermIntLit {
     Token int_lit;
@@ -43,8 +43,11 @@ struct NodeTerm {
     std::variant<NodeTermIntLit*, NodeTermIdent*> var;
 };
 
+// struct NodeBinExpr {
+//     std::variant<NodeBinExprAdd*, NodeBinExprMulti*> var;
+// };
 struct NodeBinExpr {
-    std::variant<NodeBinExprAdd*, NodeBinExprMulti*> var;
+    NodeBinExprAdd* add;
 };
 
 struct NodeExpr {
@@ -137,7 +140,8 @@ public:
                 consume();
                 if (auto rhs = parse_expr()) {
                     bin_expr_add->rhs = rhs.value();
-                    bin_expr->var = bin_expr_add;
+                    // bin_expr->var = bin_expr_add;
+                    bin_expr->add = bin_expr_add; // MADE TEMP CHANGE HERE
                     auto expr = m_allocator.alloc<NodeExpr>();
                     expr->var = bin_expr;
                     return expr;

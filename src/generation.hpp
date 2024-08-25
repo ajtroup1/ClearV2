@@ -55,7 +55,18 @@ public:
             }
             // handles binary expressions
             void operator()(const NodeBinExpr* bin_expr) const {
-                assert(false);
+                // gen both sides of the bin expr and leave them on the top of the stack
+                gen->gen_expr(bin_expr->add->lhs);
+                gen->gen_expr(bin_expr->add->rhs);
+
+                // retreive the values from the stack to perform addition
+                gen->pop("rax");
+                gen->pop("rbx");
+
+                // stream addition command into asm output
+                gen->m_output << "    add rax, rbx\n"; // add command adds the values in the 2 registers and stores the result in the first register listed (rax)
+                // push the evaluated value back onto the stack so it can be assigned to an identifier
+                gen->push("rax");
             }
         };
 
