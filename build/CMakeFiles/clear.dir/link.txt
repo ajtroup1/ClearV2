@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/clear.dir/src/main.cpp.o -o clear
+/usr/bin/g++ -g CMakeFiles/clear.dir/src/main.cpp.o -o clear 

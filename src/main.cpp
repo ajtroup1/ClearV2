@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     }
 
     Generator generator(prog.value());
-
+    
     {
         std::fstream file("out.asm", std::ios::out);
         file << generator.generate_prog();

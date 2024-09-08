@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/adamjtroup/shenanigans and hijinx/ClearV2/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/clear.dir/src/main.cpp.o -c \"/home/adamjtroup/shenanigans and hijinx/ClearV2/src/main.cpp\"",
+  "file": "/home/adamjtroup/shenanigans and hijinx/ClearV2/src/main.cpp"
+}
+]
